@@ -124,7 +124,9 @@ class TranslationsPresenter @Inject constructor(
         }
 
         if (isSolutionValid(solutionsPositions)) {
-            solutions.add(Solution(lastPositionsSelection))
+            val solutionList = arrayListOf<Int>()
+            solutionList.addAll(lastPositionsSelection)
+            solutions.add(Solution(solutionList))
         }
 
         setSolutionItems()

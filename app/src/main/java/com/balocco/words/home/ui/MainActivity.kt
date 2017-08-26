@@ -35,7 +35,16 @@ class MainActivity : BaseActivity(),
 
         presenter.setView(this)
         presenter.start(savedInstanceState)
+    }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        presenter.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        presenter.onSavedInstanceState(outState)
     }
 
     override fun onDestroy() {
@@ -53,6 +62,10 @@ class MainActivity : BaseActivity(),
 
     override fun onInstructionsReady() {
         presenter.onInstructionsReady()
+    }
+
+    override fun onGridCompleted() {
+        presenter.onGridCompleted()
     }
 
     override fun showMessage(@StringRes messageRes: Int) {
