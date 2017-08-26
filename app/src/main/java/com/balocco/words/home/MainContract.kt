@@ -12,7 +12,13 @@ interface MainContract {
 
         fun start(savedInstanceState: Bundle?)
 
+        fun onRestoreInstanceState(savedInstanceState: Bundle?)
+
+        fun onSavedInstanceState(outBundle: Bundle?)
+
         fun onInstructionsReady()
+
+        fun onGridCompleted()
 
     }
 

@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.balocco.words.R
@@ -129,7 +128,7 @@ class TranslationsFragment : BaseFragment(),
     @OnClick(R.id.btn_next)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.btn_next -> Toast.makeText(activity, "Move to next", Toast.LENGTH_SHORT).show()
+            R.id.btn_next -> container.onGridCompleted()
         }
     }
 
@@ -156,6 +155,8 @@ class TranslationsFragment : BaseFragment(),
     }
 
     interface FragmentContainer {
+
+        fun onGridCompleted()
 
     }
 
