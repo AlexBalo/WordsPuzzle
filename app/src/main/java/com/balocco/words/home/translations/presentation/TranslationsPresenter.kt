@@ -123,7 +123,7 @@ class TranslationsPresenter @Inject constructor(
             solutionsPositions.add(getPositionsFromCoordinates(allSolutionsCoordinates[i]))
         }
 
-        if (isSolutionValidWithCoordinates(solutionsPositions)) {
+        if (isSolutionValid(solutionsPositions)) {
             val solutionList = arrayListOf<Int>()
             solutionList.addAll(lastPositionsSelection)
             solutions.add(Solution(solutionList))
@@ -142,7 +142,7 @@ class TranslationsPresenter @Inject constructor(
         return (0 until size).any { solutions[it].positions == lastPositionsSelection }
     }
 
-    private fun isSolutionValidWithCoordinates(expectedSolutions: List<List<Int>>): Boolean {
+    private fun isSolutionValid(expectedSolutions: List<List<Int>>): Boolean {
         val size = expectedSolutions.size
         return (0 until size).any { expectedSolutions[it] == lastPositionsSelection }
     }
