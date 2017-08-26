@@ -44,6 +44,15 @@ class CharactersAdapter(
                 solutionItems)
     }
 
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+
+        if (holder is CharacterViewHolder) {
+            val itemViewHolder = holder as CharacterViewHolder
+            itemViewHolder.onViewRecycled()
+        }
+    }
+
     fun setSelectedItems(positions: List<Int>) {
         selectedItems.clear()
         selectedItems.addAll(positions)
