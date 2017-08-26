@@ -4,8 +4,8 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class WordLocation(
-        private val coordinates: List<WordCoordinate>,
-        private val word: String
+        val coordinates: List<WordCoordinate>,
+        val word: String
 ) : Parcelable {
 
     constructor(source: Parcel) : this(

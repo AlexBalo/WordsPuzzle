@@ -18,6 +18,7 @@ class CharactersAdapter(
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
     private val selectedItems = arrayListOf<Int>()
+    private val solutionItems = arrayListOf<Int>()
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -36,12 +37,22 @@ class CharactersAdapter(
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         val character = characters[position]
         val characterViewHolder = viewHolder as CharacterViewHolder
-        characterViewHolder.onBindViewHolder(character, position, selectedItems)
+        characterViewHolder.onBindViewHolder(
+                character,
+                position,
+                selectedItems,
+                solutionItems)
     }
 
     fun setSelectedItems(positions: List<Int>) {
         selectedItems.clear()
         selectedItems.addAll(positions)
+        notifyDataSetChanged()
+    }
+
+    fun setSolutionItems(positions: List<Int>) {
+        solutionItems.clear()
+        solutionItems.addAll(positions)
         notifyDataSetChanged()
     }
 

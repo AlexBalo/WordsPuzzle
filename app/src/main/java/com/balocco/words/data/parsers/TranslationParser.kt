@@ -67,8 +67,8 @@ class TranslationParser @Inject constructor() {
             val coordinates = key.split(COMMA)
             wordCoordinates = arrayListOf()
             for (j in 0 until coordinates.size step 2) {
-                val x = coordinates[j].toInt()
-                val y = coordinates[j + 1].toInt()
+                val x = coordinates[j + 1].toInt()
+                val y = coordinates[j].toInt()
                 wordCoordinates.add(WordCoordinate(x, y))
             }
             wordLocationsList.add(WordLocation(wordCoordinates, value))

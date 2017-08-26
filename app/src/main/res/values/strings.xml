@@ -2,6 +2,9 @@
 
     <string name="app_name">Words Puzzle</string>
 
+    <string name="btn_action_next">Next</string>
+
     <string name="instruction_check_connection">Please check your internet connection</string>
     <string name="instruction_error_while_fetching">We are experiencing issue while fetching translations, please retry later</string>
+
 </resources>

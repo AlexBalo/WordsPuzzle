@@ -12,6 +12,13 @@ data class Translation(
         val locations: List<WordLocation>
 ) : Parcelable {
 
+    fun getAllSolutionsCoordinates(): List<List<WordCoordinate>> {
+        val coordinates = arrayListOf<List<WordCoordinate>>()
+        val size = locations.size
+        (0 until size).mapTo(coordinates) { locations[it].coordinates }
+        return coordinates
+    }
+
     constructor(source: Parcel) : this(
             source.readString(),
             source.readString(),

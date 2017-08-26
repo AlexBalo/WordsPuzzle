@@ -12,9 +12,6 @@ class PositionCoordinateUseCase @Inject constructor(
         return WordCoordinate(x, y)
     }
 
-    fun positionFromCoordinate(gridSize: Int, coordinate: WordCoordinate): Int =
-            (coordinate.x * gridSize) + coordinate.y
-
     fun positionsFromCoordinates(gridSize: Int, coordinates: List<WordCoordinate>): List<Int> {
         val size = coordinates.size
         val positions = arrayListOf<Int>()
@@ -23,5 +20,8 @@ class PositionCoordinateUseCase @Inject constructor(
         }
         return positions
     }
+
+    private fun positionFromCoordinate(gridSize: Int, coordinate: WordCoordinate): Int =
+            (coordinate.x * gridSize) + coordinate.y
 
 }

@@ -8,8 +8,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
+import butterknife.OnClick
 import com.balocco.words.R
 import com.balocco.words.common.ui.BaseFragment
 import com.balocco.words.common.usecases.ScreenSizeUseCase
@@ -21,6 +24,8 @@ import com.balocco.words.home.translations.usecases.CoordinatesArrayUseCase
 import com.balocco.words.home.translations.usecases.CoordinatesComparatorUseCase
 import com.balocco.words.home.translations.usecases.PositionCoordinateUseCase
 import javax.inject.Inject
+
+private const val TRANSLATION_Y: Float = 200f
 
 class TranslationsFragment : BaseFragment(),
         TranslationsContract.View {
@@ -43,6 +48,7 @@ class TranslationsFragment : BaseFragment(),
 
     @BindView(R.id.tv_source_word) lateinit var tvSourceWord: TextView
     @BindView(R.id.rv_translations) lateinit var rvTranslations: RecyclerView
+    @BindView(R.id.btn_next) lateinit var btnNext: Button
 
     private lateinit var container: FragmentContainer
     private lateinit var presenter: TranslationsPresenter
@@ -100,6 +106,7 @@ class TranslationsFragment : BaseFragment(),
         }
 
         presenter.setView(this)
+        presenter.start(savedInstanceState)
 
         return view
     }
@@ -114,6 +121,18 @@ class TranslationsFragment : BaseFragment(),
         presenter.pause()
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        presenter.onSavedInstanceState(outState)
+    }
+
+    @OnClick(R.id.btn_next)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.btn_next -> Toast.makeText(activity, "Move to next", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun startListeningTouchEvents() {
         rvTranslations.addOnItemTouchListener(recyclerViewTouchListener)
     }
@@ -124,6 +143,16 @@ class TranslationsFragment : BaseFragment(),
 
     override fun setSelectedItems(positions: List<Int>) {
         charactersAdapter.setSelectedItems(positions)
+    }
+
+    override fun setSolutionItems(positions: List<Int>) {
+        charactersAdapter.setSolutionItems(positions)
+    }
+
+    override fun showNextButton() {
+        btnNext.visibility = View.VISIBLE
+        btnNext.translationY = TRANSLATION_Y
+        btnNext.animate().translationY(0f)
     }
 
     interface FragmentContainer {
