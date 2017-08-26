@@ -11,44 +11,59 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.balocco.words.R
+import com.balocco.words.home.translations.CharacterItemContract
+import com.balocco.words.home.translations.presentation.CharacterItemPresenter
 
 class CharacterViewHolder(
         itemView: View
-) : RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.ViewHolder(itemView), CharacterItemContract.View {
+
 
     @BindView(R.id.vg_character_cell) lateinit var vgCharacterCell: ViewGroup
     @BindView(R.id.v_selector) lateinit var vSelector: View
     @BindView(R.id.tv_character) lateinit var tvCharacter: TextView
 
     private val context: Context
-    private var characterPosition = 0
+    private val presenter: CharacterItemPresenter
 
     init {
         ButterKnife.bind(this, itemView)
 
         context = itemView.context
+
+        presenter = CharacterItemPresenter()
+        presenter.setView(this)
     }
 
     fun onBindViewHolder(character: String,
                          position: Int,
                          selectedItems: List<Int>,
                          solutionItems: List<Int>) {
-        characterPosition = position
+        presenter.onCharacterUpdated(character, position, selectedItems, solutionItems)
+    }
 
-        tvCharacter.text = character
-        if (selectedItems.contains(position)) {
-            vSelector.visibility = View.VISIBLE
-            tvCharacter.setTextColor(getColor(android.R.color.white))
-        } else {
-            vSelector.visibility = View.GONE
-            tvCharacter.setTextColor(getColor(android.R.color.black))
-        }
+    fun onViewRecycled() {
+        presenter.destroy()
+    }
 
-        if (solutionItems.contains(position)) {
-            vgCharacterCell.setBackgroundColor(getColor(R.color.colorSolution))
-        } else {
-            vgCharacterCell.setBackgroundColor(getColor(android.R.color.transparent))
-        }
+    override fun setCharacterText(text: String) {
+        tvCharacter.text = text
+    }
+
+    override fun showSelector() {
+        vSelector.visibility = View.VISIBLE
+    }
+
+    override fun hideSelector() {
+        vSelector.visibility = View.GONE
+    }
+
+    override fun setCharacterTextColor(colorRes: Int) {
+        tvCharacter.setTextColor(getColor(colorRes))
+    }
+
+    override fun setCellBackgroundColor(colorRes: Int) {
+        vgCharacterCell.setBackgroundColor(getColor(colorRes))
     }
 
     @ColorInt
