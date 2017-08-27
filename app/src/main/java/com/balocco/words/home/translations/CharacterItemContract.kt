@@ -1,12 +1,15 @@
 package com.balocco.words.home.translations
 
 import android.support.annotation.ColorRes
+import android.support.annotation.DimenRes
 import com.balocco.words.mvp.BasePresenter
 import com.balocco.words.mvp.BaseView
 
 interface CharacterItemContract {
 
     interface Presenter : BasePresenter<View> {
+
+        fun start()
 
         fun onCharacterUpdated(character: String,
                                position: Int,
@@ -16,6 +19,8 @@ interface CharacterItemContract {
     }
 
     interface View : BaseView {
+
+        fun setCharacterTextSize(@DimenRes textSize: Int)
 
         fun setCharacterText(text: String)
 

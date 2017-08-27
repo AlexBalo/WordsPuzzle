@@ -21,10 +21,7 @@ import com.balocco.words.data.models.Translation
 import com.balocco.words.home.translations.RecyclerTouchListener
 import com.balocco.words.home.translations.TranslationsContract
 import com.balocco.words.home.translations.presentation.TranslationsPresenter
-import com.balocco.words.home.translations.usecases.CoordinatesArrayUseCase
-import com.balocco.words.home.translations.usecases.CoordinatesComparatorUseCase
-import com.balocco.words.home.translations.usecases.FlagSelectorUseCase
-import com.balocco.words.home.translations.usecases.PositionCoordinateUseCase
+import com.balocco.words.home.translations.usecases.*
 import javax.inject.Inject
 
 private const val NO_TRANSLATION_Y: Float = 0f
@@ -45,6 +42,7 @@ class TranslationsFragment : BaseFragment(),
     }
 
     @Inject lateinit var screenSizeUseCase: ScreenSizeUseCase
+    @Inject lateinit var characterTextUseCase: CharacterTextSizeUseCase
     @Inject lateinit var positionCoordinateUseCase: PositionCoordinateUseCase
     @Inject lateinit var coordinatesArrayUseCase: CoordinatesArrayUseCase
     @Inject lateinit var coordinateComparatorUseCase: CoordinatesComparatorUseCase
@@ -87,7 +85,8 @@ class TranslationsFragment : BaseFragment(),
         charactersAdapter = CharactersAdapter(
                 activity,
                 translation.gridSize,
-                screenSizeUseCase)
+                screenSizeUseCase,
+                characterTextUseCase)
 
         presenter = TranslationsPresenter(
                 translation,

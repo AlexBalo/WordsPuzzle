@@ -2,9 +2,13 @@ package com.balocco.words.home.translations.presentation
 
 import com.balocco.words.R
 import com.balocco.words.home.translations.CharacterItemContract
+import com.balocco.words.home.translations.usecases.CharacterTextSizeUseCase
 import com.balocco.words.mvp.ReactivePresenter
 
-class CharacterItemPresenter : ReactivePresenter(), CharacterItemContract.Presenter {
+class CharacterItemPresenter(
+        private val gridSize: Int,
+        private val characterTextSizeUseCase: CharacterTextSizeUseCase
+) : ReactivePresenter(), CharacterItemContract.Presenter {
 
     private lateinit var view: CharacterItemContract.View
 
@@ -12,6 +16,10 @@ class CharacterItemPresenter : ReactivePresenter(), CharacterItemContract.Presen
 
     override fun setView(view: CharacterItemContract.View) {
         this.view = view
+    }
+
+    override fun start() {
+        view.setCharacterTextSize(characterTextSizeUseCase.getTextSizeBasedOnGrid(gridSize))
     }
 
     override fun onCharacterUpdated(character: String,
