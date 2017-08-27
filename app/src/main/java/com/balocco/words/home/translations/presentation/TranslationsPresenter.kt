@@ -138,7 +138,7 @@ class TranslationsPresenter @Inject constructor(
 
         val foundSolutions = solutions.size
         val expectedSolutions = translation.locations.size
-        view.updateSolutionRatio(foundSolutions, expectedSolutions)
+        view.updateSolutionsRatio(foundSolutions, expectedSolutions)
         if (foundSolutions == expectedSolutions) {
             view.stopListeningTouchEvents()
             view.showNextButton()

@@ -37,7 +37,7 @@ interface TranslationsContract {
 
         fun setSolutionItems(positions: List<Int>)
 
-        fun updateSolutionRatio(found: Int, expected: Int)
+        fun updateSolutionsRatio(found: Int, expected: Int)
 
         fun showNextButton()
 

@@ -173,7 +173,7 @@ class TranslationsFragment : BaseFragment(),
         charactersAdapter.setSolutionItems(positions)
     }
 
-    override fun updateSolutionRatio(found: Int, expected: Int) {
+    override fun updateSolutionsRatio(found: Int, expected: Int) {
         tvSolutionRatio.text = getString(R.string.translation_solution_ratio, found, expected)
     }
 
