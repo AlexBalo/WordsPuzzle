@@ -8,6 +8,8 @@ import com.balocco.words.mvp.ReactivePresenter
 import javax.inject.Inject
 
 private const val KEY_TRANSLATION_INDEX = "KEY_TRANSLATION_INDEX"
+private const val DEFAULT_PROGRESS_MAX_VALUE = 1
+private const val DEFAULT_PROGRESS_VALUE = 0
 
 class MainPresenter @Inject constructor(
         private val translationsStore: TranslationsStore
@@ -24,6 +26,7 @@ class MainPresenter @Inject constructor(
         view.setTitle(R.string.app_name)
 
         if (savedInstanceState == null || !translationsStore.hasTranslations()) {
+            view.updateProgress(DEFAULT_PROGRESS_MAX_VALUE, DEFAULT_PROGRESS_VALUE)
             view.showInstructions()
             return
         }
@@ -41,11 +44,13 @@ class MainPresenter @Inject constructor(
 
     override fun onInstructionsReady() {
         showTranslationGrid()
+        view.updateProgress(translationsStore.getTranslationCount(), translationIndex)
     }
 
     override fun onGridCompleted() {
         translationIndex++
         showTranslationGrid()
+        view.updateProgress(translationsStore.getTranslationCount(), translationIndex)
     }
 
     private fun showTranslationGrid() {

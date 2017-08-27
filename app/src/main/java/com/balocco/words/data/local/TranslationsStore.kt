@@ -13,6 +13,8 @@ class TranslationsStore @Inject constructor() {
 
     fun hasTranslations(): Boolean = !translations.isEmpty()
 
+    fun getTranslationCount(): Int = translations.size
+
     fun clearTranslations() = translations.clear()
 
     fun fetchTranslationWithIndex(index: Int): Translation? =
