@@ -43,11 +43,6 @@ class ResultFragment : BaseFragment(),
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        presenter.start()
-    }
-
     override fun onDestroy() {
         presenter.destroy()
         super.onDestroy()
@@ -56,9 +51,17 @@ class ResultFragment : BaseFragment(),
     @OnClick(R.id.btn_restart, R.id.btn_finish)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.btn_restart -> container.onRestartRequested()
-            R.id.btn_finish -> container.onFinishRequested()
+            R.id.btn_restart -> presenter.onRestartClicked()
+            R.id.btn_finish -> presenter.onFinishClicked()
         }
+    }
+
+    override fun onRestartRequested() {
+        container.onRestartRequested()
+    }
+
+    override fun onFinishRequested() {
+        container.onFinishRequested()
     }
 
     interface FragmentContainer {

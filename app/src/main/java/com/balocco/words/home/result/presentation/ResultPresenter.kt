@@ -13,13 +13,12 @@ class ResultPresenter @Inject constructor(
         this.view = view
     }
 
-    override fun start() {
-    }
-
-    override fun onCloseClicked() {
+    override fun onFinishClicked() {
+        view.onFinishRequested()
     }
 
     override fun onRestartClicked() {
+        view.onRestartRequested()
     }
 
 }

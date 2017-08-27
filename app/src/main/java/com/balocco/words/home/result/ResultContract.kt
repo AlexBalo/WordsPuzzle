@@ -7,15 +7,17 @@ interface ResultContract {
 
     interface Presenter : BasePresenter<View> {
 
-        fun start()
-
-        fun onCloseClicked()
+        fun onFinishClicked()
 
         fun onRestartClicked()
 
     }
 
     interface View : BaseView {
+
+        fun onRestartRequested()
+
+        fun onFinishRequested()
 
     }
 
