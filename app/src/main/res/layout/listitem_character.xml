@@ -23,6 +23,7 @@
         android:layout_gravity="center"
         android:textColor="@android:color/black"
         android:includeFontPadding="false"
-        android:textSize="@dimen/one_and_three_quarter_text_unit"/>
+        android:textSize="@dimen/one_and_three_quarter_text_unit"
+        android:textAllCaps="true"/>
 
 </FrameLayout>

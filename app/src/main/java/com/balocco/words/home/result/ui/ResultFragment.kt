@@ -1,31 +1,26 @@
-package com.balocco.words.home.instructions.ui
+package com.balocco.words.home.result.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import butterknife.BindView
 import butterknife.OnClick
 import com.balocco.words.R
 import com.balocco.words.common.ui.BaseFragment
-import com.balocco.words.home.instructions.InstructionsContract
-import com.balocco.words.home.instructions.presentation.InstructionsPresenter
+import com.balocco.words.home.result.ResultContract
+import com.balocco.words.home.result.presentation.ResultPresenter
 import javax.inject.Inject
 
-class InstructionsFragment : BaseFragment(),
-        InstructionsContract.View {
+class ResultFragment : BaseFragment(),
+        ResultContract.View {
 
     companion object {
-        @JvmStatic fun newInstance(): Fragment = InstructionsFragment()
+        @JvmStatic fun newInstance(): Fragment = ResultFragment()
     }
 
-    @Inject lateinit var presenter: InstructionsPresenter
-
-    @BindView(R.id.btn_continue) lateinit var btnContinue: Button
+    @Inject lateinit var presenter: ResultPresenter
 
     private lateinit var container: FragmentContainer
 
@@ -40,7 +35,7 @@ class InstructionsFragment : BaseFragment(),
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_instructions, container, false)
+        val view = inflater.inflate(R.layout.fragment_result, container, false)
         bindView(this, view)
 
         presenter.setView(this)
@@ -58,26 +53,19 @@ class InstructionsFragment : BaseFragment(),
         super.onDestroy()
     }
 
-    override fun setContinueButtonEnabled(enabled: Boolean) {
-        btnContinue.isEnabled = enabled
-    }
-
-    override fun showMessage(messageRes: Int) {
-        container.showMessage(messageRes)
-    }
-
-    @OnClick(R.id.btn_continue)
+    @OnClick(R.id.btn_restart, R.id.btn_finish)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.btn_continue -> container.onInstructionsReady()
+            R.id.btn_restart -> container.onRestartRequested()
+            R.id.btn_finish -> container.onFinishRequested()
         }
     }
 
     interface FragmentContainer {
 
-        fun onInstructionsReady()
+        fun onRestartRequested()
 
-        fun showMessage(@StringRes messageRes: Int)
+        fun onFinishRequested()
 
     }
 
