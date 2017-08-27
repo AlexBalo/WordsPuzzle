@@ -3,9 +3,12 @@
     <color name="colorPrimary">#3f51B5</color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#ff4081</color>
+    <color name="colorAccentDisabled">#80ff4081</color>
 
     <color name="colorGridBackground">#eeeeee</color>
     <color name="colorSelector">#94a4ff</color>
     <color name="colorSolution">#ffe794</color>
+
+    <color name="colorTextDisabled">#80ffffff</color>
 
 </resources>

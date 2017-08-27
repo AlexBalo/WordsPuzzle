@@ -12,15 +12,17 @@
         <item name="android:layout_marginBottom">@dimen/two_grid_unit</item>
     </style>
 
-    <!-- Instructions -->
-    <style name="InstructionsTextStyle">
+    <!-- Description -->
+    <style name="DescriptionTextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/two_grid_unit</item>
         <item name="android:layout_marginRight">@dimen/two_grid_unit</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name="InstructionsBoldTextStyle" parent="InstructionsTextStyle">
+    <style name="DescriptionBoldTextStyle" parent="DescriptionTextStyle">
         <item name="android:textStyle">bold</item>
     </style>
 

@@ -5,11 +5,11 @@
     <style name="FlatActionButtonStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/colorAccent</item>
+        <item name="android:background">@drawable/flat_btn_bg_color_selector</item>
         <item name="android:paddingBottom">@dimen/one_and_half_grid_unit</item>
         <item name="android:paddingTop">@dimen/one_and_half_grid_unit</item>
         <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@drawable/flat_btn_text_color_selector</item>
     </style>
 
 </resources>

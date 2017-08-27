@@ -7,28 +7,32 @@
     tools:ignore="contentDescription"
     tools:targetApi="lollipop">
 
-    <TextView
-        style="@style/TitleTextStyle"
-        android:text="@string/instruction_title" />
-
-    <TextView
-        style="@style/InstructionsTextStyle"
-        android:layout_marginBottom="@dimen/one_and_half_grid_unit"
-        android:text="@string/instruction_description1" />
-
-    <TextView
-        style="@style/InstructionsTextStyle"
-        android:layout_marginBottom="@dimen/one_and_half_grid_unit"
-        android:text="@string/instruction_description2" />
-
-    <TextView
-        style="@style/InstructionsBoldTextStyle"
-        android:text="@string/instruction_description3" />
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <TextView
+            style="@style/TitleTextStyle"
+            android:text="@string/instruction_title" />
+
+        <TextView
+            style="@style/DescriptionTextStyle"
+            android:layout_marginBottom="@dimen/one_and_half_grid_unit"
+            android:text="@string/instruction_description1" />
+
+        <TextView
+            style="@style/DescriptionTextStyle"
+            android:layout_marginBottom="@dimen/one_and_half_grid_unit"
+            android:text="@string/instruction_description2" />
+
+        <TextView
+            style="@style/DescriptionBoldTextStyle"
+            android:text="@string/instruction_description3" />
+    </LinearLayout>
 
     <Button
         style="@style/FlatActionButtonStyle"
