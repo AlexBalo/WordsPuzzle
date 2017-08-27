@@ -1,7 +1,7 @@
 Word Puzzle!
 =============
 
-Android game that provides users with different source words and shows a grid of character containing
+Android game that provides users with different source words and shows a grid of characters containing
 possible translations for them.
 
 Specs
