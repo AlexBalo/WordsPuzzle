@@ -30,7 +30,10 @@ interface MainContract {
 
         fun showTranslation(translation: Translation)
 
+        fun updateProgress(maxValue: Int, currentValue: Int)
+
         fun showMessage(@StringRes messageRes: Int)
+
     }
 
 }

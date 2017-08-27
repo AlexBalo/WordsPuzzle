@@ -1,9 +1,11 @@
 package com.balocco.words.home.ui
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
+import android.widget.ProgressBar
 import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -18,6 +20,10 @@ import com.balocco.words.home.presentation.MainPresenter
 import com.balocco.words.home.translations.ui.TranslationsFragment
 import javax.inject.Inject
 
+private const val ANIMATION_MULTIPLIER = 20
+private const val PROGRESS_PROPERTY = "progress"
+private const val PROGRESS_ANIMATION_DURATION_MS = 500L
+
 class MainActivity : BaseActivity(),
         MainContract.View,
         InstructionsFragment.FragmentContainer,
@@ -26,6 +32,7 @@ class MainActivity : BaseActivity(),
     @Inject lateinit var presenter: MainPresenter
 
     @BindView(R.id.toolbar) lateinit var toolbar: Toolbar
+    @BindView(R.id.pb_progress_indicator) lateinit var pbProgressIndicator: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +74,16 @@ class MainActivity : BaseActivity(),
 
     override fun onGridCompleted() {
         presenter.onGridCompleted()
+    }
+
+    override fun updateProgress(maxValue: Int, currentValue: Int) {
+        pbProgressIndicator.max = maxValue * ANIMATION_MULTIPLIER
+        val currentProgress = pbProgressIndicator.progress
+        val newProgress = currentValue * ANIMATION_MULTIPLIER
+        val animator = ObjectAnimator.ofInt(
+                pbProgressIndicator, PROGRESS_PROPERTY, currentProgress, newProgress)
+        animator.duration = PROGRESS_ANIMATION_DURATION_MS
+        animator.start()
     }
 
     override fun showMessage(@StringRes messageRes: Int) {
