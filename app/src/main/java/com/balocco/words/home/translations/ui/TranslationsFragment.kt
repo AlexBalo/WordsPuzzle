@@ -24,6 +24,7 @@ import com.balocco.words.home.translations.usecases.CoordinatesComparatorUseCase
 import com.balocco.words.home.translations.usecases.PositionCoordinateUseCase
 import javax.inject.Inject
 
+private const val NO_TRANSLATION_Y: Float = 0f
 private const val TRANSLATION_Y: Float = 200f
 
 class TranslationsFragment : BaseFragment(),
@@ -79,7 +80,6 @@ class TranslationsFragment : BaseFragment(),
         charactersAdapter = CharactersAdapter(
                 activity,
                 translation.gridSize,
-                translation.characterList,
                 screenSizeUseCase)
 
         presenter = TranslationsPresenter(
@@ -105,9 +105,13 @@ class TranslationsFragment : BaseFragment(),
         }
 
         presenter.setView(this)
-        presenter.start(savedInstanceState)
 
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        presenter.start(savedInstanceState)
     }
 
     override fun onResume() {
@@ -140,6 +144,10 @@ class TranslationsFragment : BaseFragment(),
         rvTranslations.removeOnItemTouchListener(recyclerViewTouchListener)
     }
 
+    override fun setCharacters(characters: List<String>) {
+        charactersAdapter.setCharacters(characters)
+    }
+
     override fun setSelectedItems(positions: List<Int>) {
         charactersAdapter.setSelectedItems(positions)
     }
@@ -151,7 +159,7 @@ class TranslationsFragment : BaseFragment(),
     override fun showNextButton() {
         btnNext.visibility = View.VISIBLE
         btnNext.translationY = TRANSLATION_Y
-        btnNext.animate().translationY(0f)
+        btnNext.animate().translationY(NO_TRANSLATION_Y)
     }
 
     interface FragmentContainer {

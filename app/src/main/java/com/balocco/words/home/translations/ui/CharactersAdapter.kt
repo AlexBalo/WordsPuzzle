@@ -12,11 +12,11 @@ import com.balocco.words.common.usecases.ScreenSizeUseCase
 class CharactersAdapter(
         context: Context,
         private val gridSize: Int,
-        private val characters: List<String>,
         private val screenSizeUseCase: ScreenSizeUseCase
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
+    private val characters = arrayListOf<String>()
     private val selectedItems = arrayListOf<Int>()
     private val solutionItems = arrayListOf<Int>()
 
@@ -51,6 +51,12 @@ class CharactersAdapter(
             val itemViewHolder = holder as CharacterViewHolder
             itemViewHolder.onViewRecycled()
         }
+    }
+
+    fun setCharacters(charactersList: List<String>) {
+        characters.clear()
+        characters.addAll(charactersList)
+        notifyDataSetChanged()
     }
 
     fun setSelectedItems(positions: List<Int>) {
