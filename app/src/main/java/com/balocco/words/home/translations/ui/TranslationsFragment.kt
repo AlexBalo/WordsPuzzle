@@ -98,6 +98,7 @@ class TranslationsFragment : BaseFragment(),
         tvSourceWord.text = translation.word
 
         val columnCount = translation.gridSize
+
         rvTranslations.apply {
             layoutManager = GridLayoutManager(activity, columnCount)
             adapter = charactersAdapter

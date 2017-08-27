@@ -1,27 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:ignore="contentDescription"
-    tools:targetApi="lollipop"
-    android:orientation="vertical">
+    tools:targetApi="lollipop">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instructions"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/two_grid_unit"
+        android:layout_marginTop="@dimen/two_grid_unit"
+        android:text="@string/instruction_title"
+        android:textAllCaps="true"
+        android:textSize="@dimen/two_and_half_text_unit" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Here we will put the instructions and we need to replace them"/>
+        android:layout_marginBottom="@dimen/one_and_half_grid_unit"
+        android:layout_marginLeft="@dimen/two_grid_unit"
+        android:layout_marginRight="@dimen/two_grid_unit"
+        android:text="@string/instruction_description1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/one_and_half_grid_unit"
+        android:layout_marginLeft="@dimen/two_grid_unit"
+        android:layout_marginRight="@dimen/two_grid_unit"
+        android:text="@string/instruction_description2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/two_grid_unit"
+        android:layout_marginRight="@dimen/two_grid_unit"
+        android:text="@string/instruction_description3"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btn_continue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:text="Continue"/>
+        android:background="@color/colorAccent"
+        android:paddingBottom="@dimen/one_and_half_grid_unit"
+        android:paddingTop="@dimen/one_and_half_grid_unit"
+        android:stateListAnimator="@null"
+        android:text="@string/btn_action_continue"
+        android:textColor="@android:color/white" />
 </LinearLayout>

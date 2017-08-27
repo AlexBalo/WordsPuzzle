@@ -8,6 +8,7 @@ import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.balocco.words.R
+import com.balocco.words.common.extensions.AnimationType
 import com.balocco.words.common.extensions.replaceWithoutBackStack
 import com.balocco.words.common.ui.BaseActivity
 import com.balocco.words.data.models.Translation
@@ -53,11 +54,11 @@ class MainActivity : BaseActivity(),
     }
 
     override fun showInstructions() {
-        showFragment(InstructionsFragment.newInstance())
+        showFragment(InstructionsFragment.newInstance(), AnimationType.NONE)
     }
 
     override fun showTranslation(translation: Translation) {
-        showFragment(TranslationsFragment.newInstance(translation))
+        showFragment(TranslationsFragment.newInstance(translation), AnimationType.SLIDE)
     }
 
     override fun onInstructionsReady() {
@@ -72,6 +73,7 @@ class MainActivity : BaseActivity(),
         Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showFragment(fragment: Fragment) =
-            supportFragmentManager.replaceWithoutBackStack(R.id.fragment_container, fragment)
+    private fun showFragment(fragment: Fragment, animationType: AnimationType) =
+            supportFragmentManager.replaceWithoutBackStack(
+                    R.id.fragment_container, fragment, animationType)
 }
