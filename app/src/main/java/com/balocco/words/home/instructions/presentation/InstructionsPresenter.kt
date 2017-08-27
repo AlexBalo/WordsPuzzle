@@ -5,7 +5,7 @@ import com.balocco.words.common.schedulers.SchedulerProvider
 import com.balocco.words.common.usecases.ConnectionUseCase
 import com.balocco.words.data.local.TranslationsStore
 import com.balocco.words.home.instructions.InstructionsContract
-import com.balocco.words.home.usecases.FetchTranslationsUseCase
+import com.balocco.words.home.instructions.usecases.FetchTranslationsUseCase
 import com.balocco.words.mvp.ReactivePresenter
 import javax.inject.Inject
 

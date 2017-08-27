@@ -1,4 +1,4 @@
-package com.balocco.words.home.usecases
+package com.balocco.words.home.instructions.usecases
 
 import com.balocco.words.data.local.TranslationsStore
 import com.balocco.words.data.parsers.TranslationParser
@@ -20,9 +20,10 @@ class FetchTranslationsUseCase @Inject constructor(
                     Completable.fromAction {
                         val responseBodyString = it.string()
                         val lines = responseBodyString.split(BREAK_LINE)
-                        for (line in lines) {
-                            val translation = translationParser.parseTranslation(line)
-                            translationsStore.addTranslation(translation)
+                        lines.map {
+                            translationParser.parseTranslation(it)
+                        }.forEach {
+                            translationsStore.addTranslation(it)
                         }
                     }
                 }
