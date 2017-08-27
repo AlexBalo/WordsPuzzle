@@ -2,6 +2,7 @@ package com.balocco.words.home.translations.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.OnClick
@@ -21,6 +23,7 @@ import com.balocco.words.home.translations.TranslationsContract
 import com.balocco.words.home.translations.presentation.TranslationsPresenter
 import com.balocco.words.home.translations.usecases.CoordinatesArrayUseCase
 import com.balocco.words.home.translations.usecases.CoordinatesComparatorUseCase
+import com.balocco.words.home.translations.usecases.FlagSelectorUseCase
 import com.balocco.words.home.translations.usecases.PositionCoordinateUseCase
 import javax.inject.Inject
 
@@ -45,9 +48,13 @@ class TranslationsFragment : BaseFragment(),
     @Inject lateinit var positionCoordinateUseCase: PositionCoordinateUseCase
     @Inject lateinit var coordinatesArrayUseCase: CoordinatesArrayUseCase
     @Inject lateinit var coordinateComparatorUseCase: CoordinatesComparatorUseCase
+    @Inject lateinit var flagSelectorUseCase: FlagSelectorUseCase
 
+    @BindView(R.id.iv_source) lateinit var ivSource: ImageView
     @BindView(R.id.tv_source_word) lateinit var tvSourceWord: TextView
+    @BindView(R.id.iv_target) lateinit var ivTarget: ImageView
     @BindView(R.id.rv_translations) lateinit var rvTranslations: RecyclerView
+    @BindView(R.id.tv_solutions_ratio) lateinit var tvSolutionRatio: TextView
     @BindView(R.id.btn_next) lateinit var btnNext: Button
 
     private lateinit var container: FragmentContainer
@@ -86,7 +93,8 @@ class TranslationsFragment : BaseFragment(),
                 translation,
                 positionCoordinateUseCase,
                 coordinatesArrayUseCase,
-                coordinateComparatorUseCase)
+                coordinateComparatorUseCase,
+                flagSelectorUseCase)
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -149,12 +157,24 @@ class TranslationsFragment : BaseFragment(),
         charactersAdapter.setCharacters(characters)
     }
 
+    override fun setSourceFlag(@DrawableRes resource: Int) {
+        ivSource.setImageResource(resource)
+    }
+
+    override fun setTargetFlag(@DrawableRes resource: Int) {
+        ivTarget.setImageResource(resource)
+    }
+
     override fun setSelectedItems(positions: List<Int>) {
         charactersAdapter.setSelectedItems(positions)
     }
 
     override fun setSolutionItems(positions: List<Int>) {
         charactersAdapter.setSolutionItems(positions)
+    }
+
+    override fun updateSolutionsRatio(found: Int, expected: Int) {
+        tvSolutionRatio.text = getString(R.string.translation_solution_ratio, found, expected)
     }
 
     override fun showNextButton() {

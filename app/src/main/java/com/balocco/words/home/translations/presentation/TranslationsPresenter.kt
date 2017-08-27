@@ -7,6 +7,7 @@ import com.balocco.words.data.models.WordCoordinate
 import com.balocco.words.home.translations.TranslationsContract
 import com.balocco.words.home.translations.usecases.CoordinatesArrayUseCase
 import com.balocco.words.home.translations.usecases.CoordinatesComparatorUseCase
+import com.balocco.words.home.translations.usecases.FlagSelectorUseCase
 import com.balocco.words.home.translations.usecases.PositionCoordinateUseCase
 import com.balocco.words.home.translations.viewmodels.Solution
 import com.balocco.words.mvp.ReactivePresenter
@@ -19,7 +20,8 @@ class TranslationsPresenter @Inject constructor(
         private val translation: Translation,
         private val positionCoordinate: PositionCoordinateUseCase,
         private val coordinatesArray: CoordinatesArrayUseCase,
-        private val coordinatesComparator: CoordinatesComparatorUseCase
+        private val coordinatesComparator: CoordinatesComparatorUseCase,
+        private val flagsSelector: FlagSelectorUseCase
 ) : ReactivePresenter(), TranslationsContract.Presenter {
 
     private lateinit var view: TranslationsContract.View
@@ -36,6 +38,8 @@ class TranslationsPresenter @Inject constructor(
 
     override fun start(savedInstanceState: Bundle?) {
         view.setCharacters(translation.characterList)
+        view.setSourceFlag(flagsSelector.getFlagResource(translation.sourceLanguage))
+        view.setTargetFlag(flagsSelector.getFlagResource(translation.targetLanguage))
         if (savedInstanceState != null) {
             solutions = savedInstanceState.getParcelableArrayList(KEY_SOLUTIONS)
         }
@@ -132,7 +136,10 @@ class TranslationsPresenter @Inject constructor(
 
         setSolutionItems()
 
-        if (solutions.size == translation.locations.size) {
+        val foundSolutions = solutions.size
+        val expectedSolutions = translation.locations.size
+        view.updateSolutionsRatio(foundSolutions, expectedSolutions)
+        if (foundSolutions == expectedSolutions) {
             view.stopListeningTouchEvents()
             view.showNextButton()
         }
