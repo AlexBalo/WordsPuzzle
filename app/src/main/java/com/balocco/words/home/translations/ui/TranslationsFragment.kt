@@ -53,7 +53,7 @@ class TranslationsFragment : BaseFragment(),
     private lateinit var container: FragmentContainer
     private lateinit var presenter: TranslationsPresenter
     private lateinit var translation: Translation
-    private lateinit var characterAdapter: CharactersAdapter
+    private lateinit var charactersAdapter: CharactersAdapter
     private lateinit var recyclerViewTouchListener: RecyclerTouchListener
 
     private val itemTouchListener = object : RecyclerTouchListener.ItemTouchListener {
@@ -77,7 +77,7 @@ class TranslationsFragment : BaseFragment(),
 
         recyclerViewTouchListener = RecyclerTouchListener(itemTouchListener)
 
-        characterAdapter = CharactersAdapter(
+        charactersAdapter = CharactersAdapter(
                 activity,
                 translation.gridSize,
                 screenSizeUseCase)
@@ -100,7 +100,7 @@ class TranslationsFragment : BaseFragment(),
         val columnCount = translation.gridSize
         rvTranslations.apply {
             layoutManager = GridLayoutManager(activity, columnCount)
-            adapter = characterAdapter
+            adapter = charactersAdapter
             setHasFixedSize(true)
         }
 
@@ -145,15 +145,15 @@ class TranslationsFragment : BaseFragment(),
     }
 
     override fun setCharacters(characters: List<String>) {
-        characterAdapter.setCharacters(characters)
+        charactersAdapter.setCharacters(characters)
     }
 
     override fun setSelectedItems(positions: List<Int>) {
-        characterAdapter.setSelectedItems(positions)
+        charactersAdapter.setSelectedItems(positions)
     }
 
     override fun setSolutionItems(positions: List<Int>) {
-        characterAdapter.setSolutionItems(positions)
+        charactersAdapter.setSolutionItems(positions)
     }
 
     override fun showNextButton() {
