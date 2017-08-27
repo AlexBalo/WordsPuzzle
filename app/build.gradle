@@ -63,6 +63,7 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:${config.butterKnifeVersion}"
 
     // Misc
+    // Make it easier to remove intrinsic paddings of the stock material design horizontal progress bar
     implementation "me.zhanghai.android.materialprogressbar:library:${config.materialProgressVersion}"
 
     testImplementation "junit:junit:${config.junitVersion}"
