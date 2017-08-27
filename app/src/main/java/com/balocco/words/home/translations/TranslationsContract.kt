@@ -1,6 +1,7 @@
 package com.balocco.words.home.translations
 
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import com.balocco.words.mvp.BasePresenter
 import com.balocco.words.mvp.BaseView
 
@@ -28,9 +29,15 @@ interface TranslationsContract {
 
         fun setCharacters(characters: List<String>)
 
+        fun setSourceFlag(@DrawableRes resource: Int)
+
+        fun setTargetFlag(@DrawableRes resource: Int)
+
         fun setSelectedItems(positions: List<Int>)
 
         fun setSolutionItems(positions: List<Int>)
+
+        fun updateSolutionRatio(found: Int, expected: Int)
 
         fun showNextButton()
 

@@ -11,14 +11,21 @@ import com.balocco.words.common.usecases.ScreenSizeUseCase
 
 class CharactersAdapter(
         context: Context,
-        private val gridSize: Int,
-        private val screenSizeUseCase: ScreenSizeUseCase
+        gridSize: Int,
+        screenSizeUseCase: ScreenSizeUseCase
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
     private val characters = arrayListOf<String>()
     private val selectedItems = arrayListOf<Int>()
     private val solutionItems = arrayListOf<Int>()
+    private val cellSize: Int
+
+    init {
+        val margin = context.resources.getDimensionPixelSize(R.dimen.character_grid_margin)
+        val width = screenSizeUseCase.getScreenWidth() - (margin * 2)
+        cellSize = width / gridSize
+    }
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -48,8 +55,7 @@ class CharactersAdapter(
         super.onViewRecycled(holder)
 
         if (holder is CharacterViewHolder) {
-            val itemViewHolder = holder as CharacterViewHolder
-            itemViewHolder.onViewRecycled()
+            holder.onViewRecycled()
         }
     }
 
@@ -72,8 +78,7 @@ class CharactersAdapter(
     }
 
     private fun setViewLayoutParams(view: View) {
-        val width = screenSizeUseCase.getScreenWidth() / gridSize
-        val params = FrameLayout.LayoutParams(width, width)
+        val params = FrameLayout.LayoutParams(cellSize, cellSize)
         view.layoutParams = params
     }
 
