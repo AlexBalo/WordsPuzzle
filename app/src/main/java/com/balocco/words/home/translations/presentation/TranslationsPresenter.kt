@@ -35,6 +35,7 @@ class TranslationsPresenter @Inject constructor(
     }
 
     override fun start(savedInstanceState: Bundle?) {
+        view.setCharacters(translation.characterList)
         if (savedInstanceState != null) {
             solutions = savedInstanceState.getParcelableArrayList(KEY_SOLUTIONS)
         }

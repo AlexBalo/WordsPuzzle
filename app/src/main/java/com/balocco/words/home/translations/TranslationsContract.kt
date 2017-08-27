@@ -1,7 +1,6 @@
 package com.balocco.words.home.translations
 
 import android.os.Bundle
-import android.view.MotionEvent
 import com.balocco.words.mvp.BasePresenter
 import com.balocco.words.mvp.BaseView
 
@@ -26,6 +25,8 @@ interface TranslationsContract {
         fun startListeningTouchEvents()
 
         fun stopListeningTouchEvents()
+
+        fun setCharacters(characters: List<String>)
 
         fun setSelectedItems(positions: List<Int>)
 

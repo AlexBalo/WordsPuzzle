@@ -24,6 +24,7 @@ import com.balocco.words.home.translations.usecases.CoordinatesComparatorUseCase
 import com.balocco.words.home.translations.usecases.PositionCoordinateUseCase
 import javax.inject.Inject
 
+private const val NO_TRANSLATION_Y: Float = 0f
 private const val TRANSLATION_Y: Float = 200f
 
 class TranslationsFragment : BaseFragment(),
@@ -52,7 +53,7 @@ class TranslationsFragment : BaseFragment(),
     private lateinit var container: FragmentContainer
     private lateinit var presenter: TranslationsPresenter
     private lateinit var translation: Translation
-    private lateinit var charactersAdapter: CharactersAdapter
+    private lateinit var characterAdapter: CharactersAdapter
     private lateinit var recyclerViewTouchListener: RecyclerTouchListener
 
     private val itemTouchListener = object : RecyclerTouchListener.ItemTouchListener {
@@ -76,10 +77,9 @@ class TranslationsFragment : BaseFragment(),
 
         recyclerViewTouchListener = RecyclerTouchListener(itemTouchListener)
 
-        charactersAdapter = CharactersAdapter(
+        characterAdapter = CharactersAdapter(
                 activity,
                 translation.gridSize,
-                translation.characterList,
                 screenSizeUseCase)
 
         presenter = TranslationsPresenter(
@@ -100,14 +100,18 @@ class TranslationsFragment : BaseFragment(),
         val columnCount = translation.gridSize
         rvTranslations.apply {
             layoutManager = GridLayoutManager(activity, columnCount)
-            adapter = charactersAdapter
+            adapter = characterAdapter
             setHasFixedSize(true)
         }
 
         presenter.setView(this)
-        presenter.start(savedInstanceState)
 
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        presenter.start(savedInstanceState)
     }
 
     override fun onResume() {
@@ -140,18 +144,22 @@ class TranslationsFragment : BaseFragment(),
         rvTranslations.removeOnItemTouchListener(recyclerViewTouchListener)
     }
 
+    override fun setCharacters(characters: List<String>) {
+        characterAdapter.setCharacters(characters)
+    }
+
     override fun setSelectedItems(positions: List<Int>) {
-        charactersAdapter.setSelectedItems(positions)
+        characterAdapter.setSelectedItems(positions)
     }
 
     override fun setSolutionItems(positions: List<Int>) {
-        charactersAdapter.setSolutionItems(positions)
+        characterAdapter.setSolutionItems(positions)
     }
 
     override fun showNextButton() {
         btnNext.visibility = View.VISIBLE
         btnNext.translationY = TRANSLATION_Y
-        btnNext.animate().translationY(0f)
+        btnNext.animate().translationY(NO_TRANSLATION_Y)
     }
 
     interface FragmentContainer {
