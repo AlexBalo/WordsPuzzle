@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.balocco.words.R
 import com.balocco.words.common.usecases.ScreenSizeUseCase
+import com.balocco.words.home.translations.usecases.CharacterTextSizeUseCase
 
 class CharactersAdapter(
         context: Context,
-        gridSize: Int,
-        screenSizeUseCase: ScreenSizeUseCase
+        private val gridSize: Int,
+        screenSizeUseCase: ScreenSizeUseCase,
+        private val characterTextUseCase: CharacterTextSizeUseCase
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
@@ -27,18 +29,14 @@ class CharactersAdapter(
         cellSize = width / gridSize
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int): Long = position.toLong()
 
-    override fun getItemCount(): Int {
-        return characters.size
-    }
+    override fun getItemCount(): Int = characters.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = layoutInflater.inflate(R.layout.listitem_character, parent, false)
         setViewLayoutParams(view)
-        return CharacterViewHolder(view)
+        return CharacterViewHolder(view, gridSize, characterTextUseCase)
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
