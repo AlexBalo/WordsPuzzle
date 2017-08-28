@@ -12,8 +12,6 @@ class CharacterItemPresenter(
 
     private lateinit var view: CharacterItemContract.View
 
-    private var characterPosition = 0
-
     override fun setView(view: CharacterItemContract.View) {
         this.view = view
     }
@@ -26,8 +24,6 @@ class CharacterItemPresenter(
                                     position: Int,
                                     selectedItems: List<Int>,
                                     solutionItems: List<Int>) {
-        characterPosition = position
-
         view.setCharacterText(character)
 
         if (selectedItems.contains(position)) {
