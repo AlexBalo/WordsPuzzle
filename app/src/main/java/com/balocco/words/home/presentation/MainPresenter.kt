@@ -8,17 +8,18 @@ import com.balocco.words.home.MainContract
 import com.balocco.words.mvp.ReactivePresenter
 import javax.inject.Inject
 
-private const val KEY_TRANSLATION_INDEX = "KEY_TRANSLATION_INDEX"
-private const val DEFAULT_PROGRESS_MAX_VALUE = 1
-private const val DEFAULT_PROGRESS_VALUE = 0
-private const val DEFAULT_INDEX = 0
+const val KEY_TRANSLATION_INDEX = "KEY_TRANSLATION_INDEX"
+const val DEFAULT_PROGRESS_MAX_VALUE = 1
+const val DEFAULT_PROGRESS_VALUE = 0
+const val DEFAULT_INDEX = 0
 
 class MainPresenter @Inject constructor(
         private val translationsStore: TranslationsStore
 ) : ReactivePresenter(), MainContract.Presenter {
 
     private lateinit var view: MainContract.View
-    private var translationIndex = DEFAULT_INDEX
+
+    var translationIndex = DEFAULT_INDEX
 
     override fun setView(view: MainContract.View) {
         this.view = view
