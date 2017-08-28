@@ -6,7 +6,7 @@ import com.balocco.words.data.remote.RemoteDataSource
 import io.reactivex.Completable
 import javax.inject.Inject
 
-private const val BREAK_LINE = "\n"
+const val BREAK_LINE = "\n"
 
 class FetchTranslationsUseCase @Inject constructor(
         private val remoteDataSource: RemoteDataSource,
